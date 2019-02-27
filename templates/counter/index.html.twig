@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Counter index{% endblock %}
+
+{% block body %}
+    <h1>Counter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>EndDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for counter in counters %}
+            <tr>
+                <td>{{ counter.id }}</td>
+                <td>{{ counter.name }}</td>
+                <td>{{ counter.endDate ? counter.endDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('counter_show', {'id': counter.id}) }}">show</a>
+                    <a href="{{ path('counter_edit', {'id': counter.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('counter_new') }}">Create new</a>
+{% endblock %}

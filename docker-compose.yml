@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  traefik:
+    image: traefik:1.7
+    command: --docker --docker.exposedbydefault=false
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  backend:
+    image: countdown/backend:1.0
+    build:
+      context: ./
+      dockerfile: ./docker/backend/Dockerfile
+    labels:
+      - traefik.enable=true
+      - traefik.backend=app
+      - traefik.frontend.rule=Host:counter.local
+    env_file:
+      - .env
+    environment:
+      APACHE_DOCUMENT_ROOT: public/
+      DATABASE_URL: mysql://db_user:db_password@mysql:3306/db_name
+    volumes:
+      - .:/var/www/html:rw
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/utf8mb4.cnf:/etc/mysql/conf.d/utf8mb4.cnf:ro
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    labels:
+      - traefik.enable=true
+      - traefik.backend=phpmyadmin
+      - traefik.frontend.rule=Host:phpadmin.counter.local
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: db_user
+      PMA_PASSWORD: db_password
+
+volumes:
+  mysql_data:
+    driver: local
