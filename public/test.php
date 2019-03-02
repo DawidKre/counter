@@ -29,7 +29,8 @@ for($i = 0; $i <= 60; $i++){
     $interval = date_diff($future_date, $now);
     if($future_date < $now){
         // Open the first source image and add the text.
-        $image = imagecreatefrompng('countdown.png');;
+        $image = imagecreatefrompng('templates/countdown.png');;
+
         $text = $interval->format('00:00:00:00');
         imagettftext ($image , $font['size'] , $font['angle'] , $font['x-offset'] , $font['y-offset'] , $font['color'] , $font['file'], $text );
         ob_start();

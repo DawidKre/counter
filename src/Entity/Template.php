@@ -26,14 +26,14 @@ class Template
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Counter", mappedBy="template")
-     */
-    private $counters;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Counter", mappedBy="template")
+     */
+    private $counters;
 
     public function __construct()
     {
@@ -53,6 +53,18 @@ class Template
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
@@ -84,18 +96,6 @@ class Template
                 $counter->setTemplate(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
 
         return $this;
     }

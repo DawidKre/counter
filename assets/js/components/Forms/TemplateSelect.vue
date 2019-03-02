@@ -6,16 +6,21 @@
       @change="selectionChanged"
       :deletable-chips="true"
       label="Select template"
-      item-text="name"
-      item-value="image"
       persistent-hint
       :clearable="true"
     >
+      <template v-slot:selection="data">
+          {{ data.item.name }}
+      </template>
+      <template v-slot:item="data">
+        {{ data.item.name }}
+      </template>
       <v-slide-x-reverse-transition
         slot="append-outer"
         mode="out-in"
       >
       </v-slide-x-reverse-transition>
+
     </v-autocomplete>
 </template>
 <script>
@@ -25,22 +30,20 @@
       return {
         isEditing: true,
         templates: [],
-        template: null
+        template: {}
       }
     },
     mounted() {
       this.getCountriesList()
     },
     methods: {
-      selectionChanged() {
+      selectionChanged(template) {
         this.$emit('select-template', this.template)
       },
       getCountriesList() {
-        this.axios
-          .get('/templates')
-          .then((response) => {
+        this.axios.get('/templates').then((response) => {
             this.templates = response.data['hydra:member']
-          })
+        })
       }
     },
   }

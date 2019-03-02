@@ -5,16 +5,17 @@ import Vue from "vue";
 import './plugins/vuetify'
 import App from "./App.vue";
 import router from "./router";
-import VueHtml2Canvas from 'vue-html2canvas'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/app.styl'
 import 'vuetify/dist/vuetify.min.css'
+import VueClipboard from 'vue-clipboard2'
 
-Vue.config.productionTip = false;
-
-Vue.use(VueAxios, axios, VueHtml2Canvas);
-axios.defaults.baseURL =  '/api/';
+Vue.use(VueClipboard)
+Vue.config.productionTip = false
+VueClipboard.config.autoSetContainer = true
+Vue.use(VueAxios, axios)
+axios.defaults.baseURL =  '/api/'
 
 Vue.use(Vuetify,{
   theme: {
@@ -29,7 +30,6 @@ Vue.use(Vuetify,{
   customProperties: true,
     iconfont: 'md',
 });
-
 
 new Vue({
   router,
