@@ -86,11 +86,12 @@
 
 <script>
   import NavBar from '../components/NavBar'
+  import AlertError from '../components/AlertError'
 
   export default {
     name: 'Counters',
     components: {
-      NavBar
+      NavBar, AlertError
     },
     data () {
       return {
