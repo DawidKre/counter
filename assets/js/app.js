@@ -15,7 +15,7 @@ Vue.use(VueClipboard)
 Vue.config.productionTip = false
 VueClipboard.config.autoSetContainer = true
 Vue.use(VueAxios, axios)
-axios.defaults.baseURL =  '/api/'
+axios.defaults.baseURL =  'http://counter.local'
 
 Vue.use(Vuetify,{
   theme: {

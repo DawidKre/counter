@@ -123,13 +123,13 @@
           }
         }
 
-        return `http://counter.local/script/show?${str}`
+        return `${this.axios.defaults.baseURL}/script/show?${str}`
       },
       counterScript() {
         return `<img style="-webkit-user-select: none;" src="${this.iframeSrc()}">`
       },
       saveCounter() {
-        this.axios.post('/counters',this.getCounterParams()).then((response) => {
+        this.axios.post('api/counters',this.getCounterParams()).then((response) => {
           this.$router.push('Counters')
         })
       },

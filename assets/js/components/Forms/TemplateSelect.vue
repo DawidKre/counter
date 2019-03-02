@@ -41,7 +41,7 @@
         this.$emit('select-template', this.template)
       },
       getCountriesList() {
-        this.axios.get('/templates').then((response) => {
+        this.axios.get('api/templates').then((response) => {
             this.templates = response.data['hydra:member']
         })
       }

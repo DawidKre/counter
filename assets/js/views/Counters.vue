@@ -149,7 +149,7 @@
         return 'check_circle_outline'
       },
       copyScript(item) {
-        this.$copyText(`<img src="${`http://counter.local/script/identifier/${item.identifier}`}">`).then(function (e) {
+        this.$copyText(`<img src="${`${this.axios.defaults.baseURL}/script/identifier/${item.identifier}`}">`).then(function (e) {
           alert('Copied')
         }, function (e) {
           alert('Can not copy')
@@ -157,12 +157,12 @@
       },
       openDeleteCounterDialog(item) {
         this.dialogDelete = true
-        this.dialog.script = `http://counter.local/script/identifier/${item.identifier}`
+        this.dialog.script = `${this.axios.defaults.baseURL}/script/identifier/${item.identifier}`
         this.dialog.id = item.id
       },
       deleteDialog() {
         this.dialogDelete = false
-        this.$http.delete(`counters/${this.dialog.id}`).then(() => {
+        this.$http.delete(`api/counters/${this.dialog.id}`).then(() => {
           this.dialogDelete = false
           this.getCounters()
         })
@@ -170,7 +170,7 @@
       showDialog(item) {
         this.dialog.show = true
         this.dialog.title = item.name
-        this.dialog.script = `http://counter.local/script/identifier/${item.identifier}`
+        this.dialog.script = `${this.axios.defaults.baseURL}/script/identifier/${item.identifier}`
       },
       getDateFromItem(timestamp) {
         let date = new Date(timestamp*1000).toLocaleDateString()
@@ -180,7 +180,7 @@
       },
       getCounters() {
         this.loading = true
-        this.$http.get(`/counters?itemsPerPage=${this.pagination.rowsPerPage}&page=${this.pagination.page}`)
+        this.$http.get(`api/counters?itemsPerPage=${this.pagination.rowsPerPage}&page=${this.pagination.page}`)
           .then((response) => {
             this.counters = response.data['hydra:member']
             this.totalCounters = response.data['hydra:totalItems']
