@@ -1,11 +1,13 @@
 <?php
-date_default_timezone_set('America/Halifax');
 include 'GIFEncoder.class.php';
-
 
 $time = $_GET['time'];
 $future_date = new DateTime(date('r',strtotime($time)));
+//$future_date = new DateTime();
+//$future_date->setTimestamp($time);
+
 $time_now = time();
+
 $now = new DateTime(date('r', $time_now));
 
 
@@ -16,11 +18,11 @@ $delays = array();
 $image = imagecreatefrompng('countdown.png');
 $delay = 100; // milliseconds
 $font = array(
-    'size'=>40,
+    'size'=>70,
     'angle'=>0,
-    'x-offset'=>10,
+    'x-offset'=>20,
     'y-offset'=>70,
-    'file'=>'DIGITALDREAM.ttf',
+    'file'=>'Calibri.ttf',
     'color'=>imagecolorallocate($image, 255, 255, 255),
 );
 for($i = 0; $i <= 60; $i++){
@@ -65,4 +67,5 @@ header( 'Cache-Control: post-check=0, pre-check=0', false );
 header( 'Pragma: no-cache' );
 $gif = new AnimatedGif($frames,$delays,$loops);
 $gif->getAnimation();
+//var_dump($gif->getAnimation());die;
 $gif->display();

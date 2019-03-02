@@ -1,3 +1,9 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_logout:
+  path: /logout
+
+root:
+  path: /
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: app_login
+    permanent: true

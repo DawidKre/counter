@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/app",name="app")
+ */
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!counter|api|login|logout|_(profiler|wdt)).*"}, name="vue")
      */
     public function index()
     {

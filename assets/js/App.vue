@@ -1,10 +1,15 @@
 <template>
-  <h1>Welcome Vue 21 </h1>
+  <keep-alive>
+    <router-view></router-view>
+  </keep-alive>
 </template>
-<script>
-  export default {
 
-  }
+<script>
+
+  export default {
+    name: "App",
+    data() {
+      return {};
+    }
+  };
 </script>
-<style>
-</style>

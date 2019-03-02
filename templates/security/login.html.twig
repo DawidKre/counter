@@ -1,0 +1,33 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <section class=" text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row text-center">
+                <form class="form-signin" style="margin: 0 auto" action="{{ path('app_login') }}" method="post">
+                    <h1 class="h3 mb-3 font-weight-normal">Please login</h1>
+                    <label for="username" class="sr-only">Login: </label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Login"
+                           value="{{ last_username }}"/>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                           placeholder="Password"
+                           required>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <button class="btn btn-sm btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -41,10 +41,7 @@
       }
     },
     mounted() {
-      window.setInterval(() => {
-        this.now = Math.trunc((new Date()).getTime() / 1000);
-        this.print()
-      },1000);
+
     },
   }
 </script>
