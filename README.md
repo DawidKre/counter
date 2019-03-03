@@ -94,6 +94,8 @@ TODO:
 Main thing todo is write some tests unfortunately I did not make it in time although I really wanted to.
 
 Backend
+- Improve performance of counters script
+- Test performance
 - Write some tests
 - Overall refactor mainly in filters components
 - Mobile friendly
