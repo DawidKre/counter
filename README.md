@@ -1,9 +1,4 @@
 # Counter
-docker-compose exec app bash
-
-docker-compose up -d --force-recreate --build
-docker-compose up --force-recreate --build
-
 
 sf4 Vue2 Counter App
 ========================
